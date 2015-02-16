@@ -1,4 +1,4 @@
-# Generate JSON Schema with JSON Objects
+# JSON Object to JSON Schema
 
 Effortlessly convert your JSON Object to a basic JSON Schema template for quick documentation.
 
