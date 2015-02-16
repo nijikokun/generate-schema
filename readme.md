@@ -29,6 +29,31 @@ console.log(GenerateSchema({
 }));
 ```
 
+Output:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "type": "object"
+  },
+  "_embedded": {
+    "gists": {
+      "type": "array"
+    },
+    "type": "object"
+  },
+  "total": {
+    "type": "number"
+  }
+}
+```
+
 # License
 
 MIT
