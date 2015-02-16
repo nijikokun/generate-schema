@@ -40,16 +40,25 @@ Output:
       },
       "type": "object"
     },
-    "type": "object"
-  },
-  "_embedded": {
-    "gists": {
-      "type": "array"
+    "star": {
+      "href": {
+        "type": "string"
+      },
+      "type": "object"
     },
     "type": "object"
   },
-  "total": {
-    "type": "number"
+  "id": {
+    "type": "string"
+  },
+  "created_at": {
+    "type": "string"
+  },
+  "description": {
+    "type": "string"
+  },
+  "content": {
+    "type": "string"
   }
 }
 ```
