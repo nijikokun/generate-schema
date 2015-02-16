@@ -1,0 +1,32 @@
+{
+  "name": "generate-schema",
+  "version": "1.0.0",
+  "description": "Generate JSON Schema from a JSON Object",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "schema",
+    "json",
+    "schema",
+    "json",
+    "object",
+    "object",
+    "convert",
+    "manipulate",
+    "traverse",
+    "types",
+    "type",
+    "is",
+    "is",
+    "generate",
+    "produce"
+  ],
+  "author": "Nijiko Yonskai",
+  "license": "MIT",
+  "dependencies": {
+    "type-of-is": "^3.4.0"
+  }
+}
