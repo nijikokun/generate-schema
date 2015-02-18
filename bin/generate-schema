@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+var generateSchema = require('../index')
+var split = require('split')
+var pkg = require('../package.json')
+var fs = require('fs')
+
+var args = process.argv.slice(2)
+var content = ""
+
+function evaluate (data) {
+  var obj
+
+  try {
+    obj = JSON.parse(data)
+  } catch (e) {
+    try {
+      obj = eval("("+data+")")
+    } catch (e) {
+      console.log('Invalid Object or JSON')
+    }
+  }
+
+  return obj
+}
+
+function prompt (motd) {
+  if (motd) {
+    console.log("Welcome to Generate Schema", pkg.version)
+    console.log(" ")
+    console.log("*", "Example Usage: ")
+    console.log(" ", "> {a:'b'}")
+    console.log(" ", "{ a: { type: 'string' } }")
+    console.log(" ")
+    console.log("To quit type: exit")
+    console.log(" ")
+  }
+
+  process.stdout.write("> ")
+}
+
+function callback (data) {
+  if (data == 'exit') {
+    return process.exit()
+  }
+
+  var obj = evaluate(data)
+
+  if (obj) {
+    console.log(JSON.stringify(generateSchema(obj), null, 2))
+  }
+
+  prompt()
+}
+
+if (args[0]) {
+  fs.createReadStream(args[0])
+    .pipe(process.stdin)
+    .on('close', function () {
+      process.exit(1)
+    })
+}
+
+process.stdin.resume()
+process.stdin.setEncoding('utf8')
+
+if (!args.length) {
+  prompt(true)
+
+  process.stdin.on('data', function(buf) {
+    callback(buf.toString().trim())
+  })
+} else {
+  process.stdin.on('data', function(buf) {
+    content += buf.toString()
+  })
+
+  process.stdin.on('end', function() {
+    console.log(JSON.stringify(generateSchema(evaluate(content)), null, 2))
+  })
+}

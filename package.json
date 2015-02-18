@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "generate-schema": "./bin/generate-schema"
+  },
   "keywords": [
     "json",
     "schema",
@@ -27,6 +30,7 @@
   "author": "Nijiko Yonskai",
   "license": "MIT",
   "dependencies": {
+    "split": "^0.3.3",
     "type-of-is": "^3.4.0"
   }
 }
