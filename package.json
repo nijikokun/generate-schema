@@ -1,6 +1,6 @@
 {
   "name": "generate-schema",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generate JSON Schema from a JSON Object",
   "main": "index.js",
   "scripts": {
