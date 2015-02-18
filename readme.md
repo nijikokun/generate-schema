@@ -8,6 +8,8 @@ Effortlessly convert your JSON Object to a basic JSON Schema template for quick 
 $ npm install generate-schema --save
 ```
 
+Optionally, for the binary install globally with `-g` (see below)
+
 # Usage
 
 ```js
@@ -58,6 +60,26 @@ Output:
     "type": "string"
   },
   "content": {
+    "type": "string"
+  }
+}
+```
+
+## Binary usage
+
+```bash
+ᐅ ./bin/generate-schema
+Welcome to Generate Schema 1.1.0
+
+* Example Usage:
+  > {a:'b'}
+  { a: { type: 'string' } }
+
+To quit type: exit
+
+> {a:'b'}
+{
+  "a": {
     "type": "string"
   }
 }
