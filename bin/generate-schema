@@ -1,11 +1,18 @@
 #!/usr/bin/env node
-var generateSchema = require('../index')
+var GenerateSchema = require('../src/index')
 var split = require('split')
 var pkg = require('../package.json')
 var fs = require('fs')
 
 var args = process.argv.slice(2)
 var content = ""
+var mode = "json"
+
+// Support various schema generation modes
+if (args[0] === '--generic' || args[0] === '-g') {
+  mode = "generic"
+  args.shift()
+}
 
 function evaluate (data) {
   var obj
@@ -27,6 +34,8 @@ function prompt (motd) {
   if (motd) {
     console.log("Welcome to Generate Schema", pkg.version)
     console.log(" ")
+    console.log(" ", "Mode:", mode)
+    console.log(" ")
     console.log("*", "Example Usage: ")
     console.log(" ", "> {a:'b'}")
     console.log(" ", "{ a: { type: 'string' } }")
@@ -46,7 +55,7 @@ function callback (data) {
   var obj = evaluate(data)
 
   if (obj) {
-    console.log(JSON.stringify(generateSchema(obj), null, 2))
+    console.log(JSON.stringify(GenerateSchema[mode](obj), null, 2))
   }
 
   prompt()
@@ -75,6 +84,6 @@ if (!args.length) {
   })
 
   process.stdin.on('end', function() {
-    console.log(JSON.stringify(generateSchema(evaluate(content)), null, 2))
+    console.log(JSON.stringify(GenerateSchema[mode](evaluate(content)), null, 2))
   })
 }

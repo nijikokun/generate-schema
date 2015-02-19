@@ -2,7 +2,7 @@
   "name": "generate-schema",
   "version": "1.1.0",
   "description": "Generate JSON Schema from a JSON Object",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

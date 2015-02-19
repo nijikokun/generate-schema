@@ -15,7 +15,7 @@ Optionally, for the binary install globally with `-g` (see below)
 ```js
 var GenerateSchema = require('generate-schema')
 
-console.log(GenerateSchema({
+console.log(GenerateSchema.generic({
   "_links": {
     "self": {
       "href": "/gists/42"
@@ -65,11 +65,35 @@ Output:
 }
 ```
 
+## Methods
+
+### g.generic(Object object)
+
+Generates generic schema where property types are described using primitives
+
+### g.json(String title, Mixed object)
+
+Generate JSON Schema from given object.
+
+- `title` is optional
+- `object` must be of type `Object` or `Array`
+
 ## Binary usage
 
 ```bash
-ᐅ ./bin/generate-schema
+$ generate-schema [-g] [--generic] [<file>]
+```
+
+### REPL Mode
+
+When no file is specified you will enter a repl mode.
+
+Example (`generate-schema -g`):
+
+```
 Welcome to Generate Schema 1.1.0
+
+  Mode: generic
 
 * Example Usage:
   > {a:'b'}

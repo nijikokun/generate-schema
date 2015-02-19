@@ -1,6 +1,6 @@
 var Type = require('type-of-is')
 
-module.exports = function generateJsonSchema (object) {
+function generateGenericSchema (object) {
   for (var key in object) {
     var value = object[key]
     var type = Type.string(value).toLowerCase()
@@ -21,3 +21,5 @@ module.exports = function generateJsonSchema (object) {
 
   return object
 }
+
+module.exports = generateGenericSchema
