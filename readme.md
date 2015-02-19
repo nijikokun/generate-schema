@@ -15,52 +15,98 @@ Optionally, for the binary install globally with `-g` (see below)
 ```js
 var GenerateSchema = require('generate-schema')
 
-console.log(GenerateSchema.generic({
-  "_links": {
-    "self": {
-      "href": "/gists/42"
+console.log(JSON.stringify(GenerateSchema.json('Product', [
+    {
+        "id": 2,
+        "name": "An ice sculpture",
+        "price": 12.50,
+        "tags": ["cold", "ice"],
+        "dimensions": {
+            "length": 7.0,
+            "width": 12.0,
+            "height": 9.5
+        },
+        "warehouseLocation": {
+            "latitude": -78.75,
+            "longitude": 20.4
+        }
     },
-    "star": {
-      "href": "/gists/42/star"
+    {
+        "id": 3,
+        "name": "A blue mouse",
+        "price": 25.50,
+        "dimensions": {
+            "length": 3.1,
+            "width": 1.0,
+            "height": 1.0
+        },
+        "warehouseLocation": {
+            "latitude": 54.4,
+            "longitude": -32.7
+        }
     }
-  },
-  "id": "42",
-  "created_at": "2014-04-14T02:15:15Z",
-  "description": "Description of Gist",
-  "content": "String contents"
-}));
+]), null, 2))
 ```
 
 Output:
 
 ```json
 {
-  "_links": {
-    "self": {
-      "href": {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Product Set",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "number"
+      },
+      "name": {
         "type": "string"
       },
-      "type": "object"
-    },
-    "star": {
-      "href": {
-        "type": "string"
+      "price": {
+        "type": "number"
       },
-      "type": "object"
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dimensions": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "number"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          }
+        }
+      },
+      "warehouseLocation": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      }
     },
-    "type": "object"
-  },
-  "id": {
-    "type": "string"
-  },
-  "created_at": {
-    "type": "string"
-  },
-  "description": {
-    "type": "string"
-  },
-  "content": {
-    "type": "string"
+    "required": [
+      "id",
+      "name",
+      "price",
+      "dimensions",
+      "warehouseLocation"
+    ],
+    "title": "Product"
   }
 }
 ```
