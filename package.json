@@ -30,7 +30,10 @@
   "author": "Nijiko Yonskai",
   "license": "MIT",
   "dependencies": {
-    "split": "^0.3.3",
     "type-of-is": "^3.4.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "should": "^5.0.0"
   }
 }
