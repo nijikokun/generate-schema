@@ -1,5 +1,8 @@
+// Modules
 var Type = require('type-of-is')
-var Draft = "http://json-schema.org/draft-04/schema#"
+
+// Constants
+var DRAFT = "http://json-schema.org/draft-04/schema#"
 
 function getUniqueKeys (a, b, c) {
   var a = Object.keys(a)
@@ -137,7 +140,7 @@ function processObject (object, output, nested) {
 module.exports = function (title, object) {
   var processOutput
   var output = {
-    $schema: Draft
+    $schema: DRAFT
   }
 
   // Determine title exists

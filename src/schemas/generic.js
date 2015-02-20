@@ -1,6 +1,9 @@
+// Modules
 var Type = require('type-of-is')
 
-function generateGenericSchema (object) {
+module.exports = function GenericSchemaGenerator (object, output) {
+  output = output || {}
+
   for (var key in object) {
     var value = object[key]
     var type = Type.string(value).toLowerCase()
@@ -10,16 +13,14 @@ function generateGenericSchema (object) {
     }
 
     if (type !== 'object') {
-      object[key] = {
+      output[key] = {
         type: type
       }
     } else {
-      object[key] = generateJsonSchema(object[key])
-      object[key].type = type
+      output[key] = GenericSchemaGenerator(object[key])
+      output[key].type = type
     }
   }
 
-  return object
+  return output
 }
-
-module.exports = generateGenericSchema
