@@ -1,6 +1,6 @@
 {
   "name": "generate-schema",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "author": "Nijiko Yonskai <nijikokun@gmail.com>",
   "description": "Generate JSON Schema from a JSON Object",
   "license": "MIT",
