@@ -1,7 +1,11 @@
 {
   "name": "generate-schema",
-  "version": "2.0.1",
+  "version": "2.0.2",
+  "author": "Nijiko Yonskai <nijikokun@gmail.com>",
   "description": "Generate JSON Schema from a JSON Object",
+  "license": "MIT",
+  "repository": "Nijikokun/generate-schema",
+  "homepage": "https://github.com/Nijikokun/generate-schema",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,8 +31,6 @@
     "generate",
     "produce"
   ],
-  "author": "Nijiko Yonskai",
-  "license": "MIT",
   "dependencies": {
     "type-of-is": "^3.4.0"
   },
