@@ -16,10 +16,6 @@
   "keywords": [
     "json",
     "schema",
-    "json",
-    "schema",
-    "json",
-    "object",
     "object",
     "convert",
     "manipulate",
@@ -27,9 +23,11 @@
     "types",
     "type",
     "is",
-    "is",
     "generate",
-    "produce"
+    "produce",
+    "mongoose",
+    "generic",
+    "validation"
   ],
   "dependencies": {
     "type-of-is": "^3.4.0"

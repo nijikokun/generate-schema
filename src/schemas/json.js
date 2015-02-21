@@ -47,14 +47,14 @@ function processArray (array, output, nested) {
 
   // Determine whether each item is different
   for (var index = 0, length = array.length; index < length; index++) {
-    var itemType = Type.string(array[index]).toLowerCase()
+    var elementType = Type.string(array[index]).toLowerCase()
 
-    if (type && itemType !== type) {
+    if (type && elementType !== type) {
       output.items.oneOf = []
       oneOf = true
       break
     } else {
-      type = itemType
+      type = elementType
     }
   }
 

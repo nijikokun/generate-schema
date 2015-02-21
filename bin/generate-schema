@@ -11,6 +11,9 @@ var mode = "json"
 if (args[0] === '--generic' || args[0] === '-g') {
   mode = "generic"
   args.shift()
+} else if (args[0] === '--mongoose' || args[0] === '-m') {
+  mode = "mongoose"
+  args.shift()
 }
 
 function evaluate (data) {

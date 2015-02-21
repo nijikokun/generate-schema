@@ -1,7 +1,8 @@
 // Modules
 var Type = require('type-of-is')
+var Utils = require('../utils')
 
-module.exports = function GenericSchemaGenerator (object, output) {
+module.exports = function Process (object, output) {
   output = output || {}
 
   for (var key in object) {
@@ -12,12 +13,16 @@ module.exports = function GenericSchemaGenerator (object, output) {
       type = 'null'
     }
 
+    if (type === 'string' && Utils.isDate(value)) {
+      type = 'date'
+    }
+
     if (type !== 'object') {
       output[key] = {
         type: type
       }
     } else {
-      output[key] = GenericSchemaGenerator(object[key])
+      output[key] = Process(object[key])
       output[key].type = type
     }
   }
