@@ -2,6 +2,12 @@
 
 Effortlessly convert your JSON Object to a basic JSON Schema template for quick documentation.
 
+Schema Outputs
+
+- Generic
+- JSON Schema
+- Mongoose Schema
+
 # Installation
 
 ```bash
@@ -15,7 +21,8 @@ Optionally, for the binary install globally with `-g` (see below)
 ```js
 var GenerateSchema = require('generate-schema')
 
-console.log(JSON.stringify(GenerateSchema.json('Product', [
+// Capture Schema Output
+var schema = GenerateSchema.json('Product', [
     {
         "id": 2,
         "name": "An ice sculpture",
@@ -45,7 +52,7 @@ console.log(JSON.stringify(GenerateSchema.json('Product', [
             "longitude": -32.7
         }
     }
-]), null, 2))
+])
 ```
 
 Output:
@@ -124,6 +131,10 @@ Generate JSON Schema from given object.
 - `title` is optional
 - `object` must be of type `Object` or `Array`
 
+### g.mongoose(Object object)
+
+Generates Mongoose Schema from a given object.
+
 ## Binary usage
 
 ```bash
@@ -154,6 +165,12 @@ To quit type: exit
   }
 }
 ```
+
+#### Modes
+
+- JSON Schema (Default Mode)
+- `-g, --generic` - Generic Mode
+- `-m, --mongoose` - Mongoose Mode
 
 # License
 
