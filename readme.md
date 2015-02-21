@@ -1,6 +1,6 @@
 # JSON Object to JSON Schema
 
-Effortlessly convert your JSON Object to a basic JSON Schema template for quick documentation.
+Effortlessly convert your JSON Object to JSON Schema, Mongoose Schema, or a Generic template for quick documentation / upstart.
 
 Schema Outputs
 
