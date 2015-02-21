@@ -2,7 +2,7 @@
   "name": "generate-schema",
   "version": "2.1.0",
   "author": "Nijiko Yonskai <nijikokun@gmail.com>",
-  "description": "Generate JSON Schema from a JSON Object",
+  "description": "Effortlessly convert your JSON Object to JSON Schema, Mongoose Schema, or a Generic template for quick documentation / upstart.",
   "license": "MIT",
   "repository": "Nijikokun/generate-schema",
   "homepage": "https://github.com/Nijikokun/generate-schema",
