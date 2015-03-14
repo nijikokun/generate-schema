@@ -22,8 +22,8 @@ function getUniqueKeys (a, b, c) {
         // Value is optional, it doesn't exist in A but exists in B(n)
         c.splice(cIndex, 1)
       }
-    } else {
-      // Value is required, it exists in both B and A
+    } else if (cIndex === -1) {
+      // Value is required, it exists in both B and A, and is not yet present in C
       c.push(value)
     }
   }
