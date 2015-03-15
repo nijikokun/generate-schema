@@ -1,4 +1,4 @@
-# JSON Object to JSON Schema
+# Generate Schemas
 
 Effortlessly convert your JSON Object to JSON Schema, Mongoose Schema, or a Generic template for quick documentation / upstart.
 
@@ -7,6 +7,11 @@ Schema Outputs
 - Generic
 - JSON Schema
 - Mongoose Schema
+
+[![Build Status][travis-image]][travis-url]
+[![version][npm-version]][npm-url]
+[![License][npm-license]][license-url]
+[![Downloads][npm-downloads]][npm-url]
 
 # Installation
 
@@ -175,3 +180,13 @@ To quit type: exit
 # License
 
 MIT
+
+[license-url]: https://github.com/Nijikokun/generate-schema/blob/master/LICENSE
+
+[travis-url]: https://travis-ci.org/Nijikokun/generate-schema
+[travis-image]: https://img.shields.io/travis/Nijikokun/generate-schema.svg?style=flat
+
+[npm-url]: https://www.npmjs.com/package/generate-schema
+[npm-license]: https://img.shields.io/npm/l/generate-schema.svg?style=flat
+[npm-version]: https://badge.fury.io/js/generate-schema.svg
+[npm-downloads]: https://img.shields.io/npm/dm/generate-schema.svg?style=flat
