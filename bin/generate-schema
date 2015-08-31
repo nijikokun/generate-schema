@@ -63,29 +63,29 @@ function callback (data) {
   prompt()
 }
 
+var stream = process.stdin;
+
 if (args[0]) {
-  fs.createReadStream(args[0])
-    .pipe(process.stdin)
-    .on('close', function () {
-      process.exit(1)
-    })
+  stream = fs.createReadStream(args[0]);
+  stream.on('close', function () {
+    process.exit(1)
+  })
 }
 
-process.stdin.resume()
-process.stdin.setEncoding('utf8')
+stream.setEncoding('utf8')
 
 if (!args.length) {
   prompt(true)
 
-  process.stdin.on('data', function(buf) {
+  stream.on('data', function(buf) {
     callback(buf.toString().trim())
   })
 } else {
-  process.stdin.on('data', function(buf) {
+  stream.on('data', function(buf) {
     content += buf.toString()
   })
 
-  process.stdin.on('end', function() {
+  stream.on('end', function() {
     console.log(JSON.stringify(GenerateSchema[mode](evaluate(content)), null, 2))
   })
 }
