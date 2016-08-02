@@ -38,9 +38,9 @@ module.exports = function Process (object, output) {
 
   for (var key in object) {
     var value = object[key]
-    var originalType
-    var elementType
-    var type
+    var originalType = null
+    var elementType = null
+    var type = null
 
     if (value instanceof Buffer) {
       type = 'buffer'
