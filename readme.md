@@ -183,8 +183,8 @@ MIT
 
 [license-url]: https://github.com/Nijikokun/generate-schema/blob/master/LICENSE
 
-[travis-url]: https://travis-ci.org/Nijikokun/generate-schema
-[travis-image]: https://img.shields.io/travis/Nijikokun/generate-schema.svg?style=flat
+[travis-url]: https://travis-ci.org/nijikokun/generate-schema
+[travis-image]: https://travis-ci.org/nijikokun/generate-schema.svg?branch=master
 
 [npm-url]: https://www.npmjs.com/package/generate-schema
 [npm-license]: https://img.shields.io/npm/l/generate-schema.svg?style=flat
