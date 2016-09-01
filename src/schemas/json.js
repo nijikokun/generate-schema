@@ -1,6 +1,16 @@
 // Modules
 var Type = require('type-of-is')
 
+function typeForJsonSchema (value) {
+  var type = Type.string(value);
+
+  if (type === 'date') {
+    return 'string';
+  }
+
+  return type;
+}
+
 // Constants
 var DRAFT = "http://json-schema.org/draft-04/schema#"
 
@@ -41,13 +51,13 @@ function processArray (array, output, nested) {
     }
   } else {
     output = output || {}
-    output.type = Type.string(array).toLowerCase()
+    output.type = typeForJsonSchema(array).toLowerCase()
     output.items = output.items || {}
   }
 
   // Determine whether each item is different
   for (var index = 0, length = array.length; index < length; index++) {
-    var elementType = Type.string(array[index]).toLowerCase()
+    var elementType = typeForJsonSchema(array[index]).toLowerCase()
 
     if (type && elementType !== type) {
       output.items.oneOf = []
@@ -67,7 +77,7 @@ function processArray (array, output, nested) {
   if (typeof output.items.oneOf !== 'undefined' || type === 'object') {
     for (var index = 0, length = array.length; index < length; index++) {
       var value = array[index]
-      var itemType = Type.string(value).toLowerCase()
+      var itemType = typeForJsonSchema(value).toLowerCase()
       var required = []
       var processOutput
 
@@ -106,13 +116,13 @@ function processObject (object, output, nested) {
     }
   } else {
     output = output || {}
-    output.type = Type.string(object).toLowerCase()
+    output.type = typeForJsonSchema(object).toLowerCase()
     output.properties = output.properties || {}
   }
 
   for (var key in object) {
     var value = object[key]
-    var type = Type.string(value).toLowerCase()
+    var type = typeForJsonSchema(value).toLowerCase()
 
     if (type === 'undefined') {
       type = 'null'
@@ -152,7 +162,7 @@ module.exports = function (title, object) {
   }
 
   // Set initial object type
-  output.type = Type.string(object).toLowerCase()
+  output.type = typeForJsonSchema(object).toLowerCase()
 
   // Process object
   switch (output.type) {
