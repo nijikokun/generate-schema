@@ -4,8 +4,8 @@ var Type = require('type-of-is')
 function typeForJsonSchema (value) {
   var type = Type.string(value);
 
-  if (type === 'date') {
-    return 'string';
+  if (type === 'Date') {
+    return 'String';
   }
 
   return type;
