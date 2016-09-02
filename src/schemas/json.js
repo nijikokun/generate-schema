@@ -2,10 +2,10 @@
 var Type = require('type-of-is')
 
 function typeForJsonSchema (value) {
-  var type = Type.string(value);
+  var type = Type.string(value).toLowerCase();
 
-  if (type === 'Date') {
-    return 'String';
+  if (type === 'date') {
+    return 'string';
   }
 
   return type;
@@ -51,13 +51,13 @@ function processArray (array, output, nested) {
     }
   } else {
     output = output || {}
-    output.type = typeForJsonSchema(array).toLowerCase()
+    output.type = typeForJsonSchema(array)
     output.items = output.items || {}
   }
 
   // Determine whether each item is different
   for (var index = 0, length = array.length; index < length; index++) {
-    var elementType = typeForJsonSchema(array[index]).toLowerCase()
+    var elementType = typeForJsonSchema(array[index])
 
     if (type && elementType !== type) {
       output.items.oneOf = []
@@ -77,7 +77,7 @@ function processArray (array, output, nested) {
   if (typeof output.items.oneOf !== 'undefined' || type === 'object') {
     for (var index = 0, length = array.length; index < length; index++) {
       var value = array[index]
-      var itemType = typeForJsonSchema(value).toLowerCase()
+      var itemType = typeForJsonSchema(value)
       var required = []
       var processOutput
 
@@ -116,13 +116,13 @@ function processObject (object, output, nested) {
     }
   } else {
     output = output || {}
-    output.type = typeForJsonSchema(object).toLowerCase()
+    output.type = typeForJsonSchema(object)
     output.properties = output.properties || {}
   }
 
   for (var key in object) {
     var value = object[key]
-    var type = typeForJsonSchema(value).toLowerCase()
+    var type = typeForJsonSchema(value)
 
     if (type === 'undefined') {
       type = 'null'
@@ -162,7 +162,7 @@ module.exports = function (title, object) {
   }
 
   // Set initial object type
-  output.type = typeForJsonSchema(object).toLowerCase()
+  output.type = typeForJsonSchema(object)
 
   // Process object
   switch (output.type) {
