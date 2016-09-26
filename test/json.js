@@ -71,8 +71,9 @@ describe('JSON', function () {
       schema.properties.avatar.type.should.equal('null')
     })
 
-    it('.properties.date should be of type [date]', function () {
-      schema.properties.date.type.should.equal('date')
+    it('.properties.date should be of type [string]', function () {
+      schema.properties.date.type.should.equal('string')
+      schema.properties.date.format.should.equal('date-time')
     })
 
     it('.properties.article should be of type [object]', function () {

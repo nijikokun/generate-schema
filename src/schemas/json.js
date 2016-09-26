@@ -4,6 +4,24 @@ var Type = require('type-of-is')
 // Constants
 var DRAFT = 'http://json-schema.org/draft-04/schema#'
 
+function getPropertyFormat (value) {
+  var type = Type.string(value).toLowerCase()
+
+  if (type === 'date') return 'date-time'
+
+  return null
+}
+
+function getPropertyType (value) {
+  var type = Type.string(value).toLowerCase()
+
+  if (type === 'date') return 'string'
+  if (type === 'regexp') return 'string'
+  if (type === 'function') return 'string'
+
+  return type
+}
+
 function getUniqueKeys (a, b, c) {
   a = Object.keys(a)
   b = Object.keys(b)
@@ -33,6 +51,7 @@ function getUniqueKeys (a, b, c) {
 }
 
 function processArray (array, output, nested) {
+  var format
   var oneOf
   var type
 
@@ -40,13 +59,14 @@ function processArray (array, output, nested) {
     output = { items: output }
   } else {
     output = output || {}
-    output.type = Type.string(array).toLowerCase()
+    output.type = getPropertyType(array)
     output.items = output.items || {}
   }
 
   // Determine whether each item is different
   for (var arrIndex = 0, arrLength = array.length; arrIndex < arrLength; arrIndex++) {
-    var elementType = Type.string(array[arrIndex]).toLowerCase()
+    var elementType = getPropertyType(array[arrIndex])
+    var elementFormat = getPropertyFormat(array[arrIndex])
 
     if (type && elementType !== type) {
       output.items.oneOf = []
@@ -54,37 +74,46 @@ function processArray (array, output, nested) {
       break
     } else {
       type = elementType
+      format = elementFormat
     }
   }
 
   // Setup type otherwise
   if (!oneOf) {
     output.items.type = type
+    if (format) {
+      output.items.format = format
+    }
   }
 
   // Process each item depending
   if (typeof output.items.oneOf !== 'undefined' || type === 'object') {
     for (var itemIndex = 0, itemLength = array.length; itemIndex < itemLength; itemIndex++) {
       var value = array[itemIndex]
-      var itemType = Type.string(value).toLowerCase()
-      var processOutput
+      var itemType = getPropertyType(value)
+      var itemFormat = getPropertyFormat(value)
+      var arrayItem
 
       if (itemType === 'object') {
         if (output.items.properties) {
           output.items.required = getUniqueKeys(output.items.properties, value, output.items.required)
         }
 
-        processOutput = processObject(value, oneOf ? {} : output.items.properties, true)
+        arrayItem = processObject(value, oneOf ? {} : output.items.properties, true)
       } else if (itemType === 'array') {
-        processOutput = processArray(value, oneOf ? {} : output.items.properties, true)
+        arrayItem = processArray(value, oneOf ? {} : output.items.properties, true)
       } else {
-        processOutput = { type: itemType }
+        arrayItem = {}
+        arrayItem.type = itemType
+        if (itemFormat) {
+          arrayItem.format = itemFormat
+        }
       }
 
       if (oneOf) {
-        output.items.oneOf.push(processOutput)
+        output.items.oneOf.push(arrayItem)
       } else {
-        output.items.properties = processOutput
+        output.items.properties = arrayItem
       }
     }
   }
@@ -97,19 +126,33 @@ function processObject (object, output, nested) {
     output = { properties: output }
   } else {
     output = output || {}
-    output.type = Type.string(object).toLowerCase()
+    output.type = getPropertyType(object)
     output.properties = output.properties || {}
   }
 
   for (var key in object) {
     var value = object[key]
-    var type = Type.string(value).toLowerCase()
+    var type = getPropertyType(value)
+    var format = getPropertyFormat(value)
 
     type = type === 'undefined' ? 'null' : type
 
-    if (type === 'object') output.properties[key] = processObject(value)
-    else if (type === 'array') output.properties[key] = processArray(value)
-    else output.properties[key] = { type: type }
+    if (type === 'object') {
+      output.properties[key] = processObject(value)
+      continue
+    }
+
+    if (type === 'array') {
+      output.properties[key] = processArray(value)
+      continue
+    }
+
+    output.properties[key] = {}
+    output.properties[key].type = type
+
+    if (format) {
+      output.properties[key].format = format
+    }
   }
 
   return nested ? output.properties : output
