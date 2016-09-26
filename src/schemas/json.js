@@ -2,12 +2,13 @@
 var Type = require('type-of-is')
 
 // Constants
-var DRAFT = "http://json-schema.org/draft-04/schema#"
+var DRAFT = 'http://json-schema.org/draft-04/schema#'
 
 function getUniqueKeys (a, b, c) {
-  var a = Object.keys(a)
-  var b = Object.keys(b)
-  var c = c || []
+  a = Object.keys(a)
+  b = Object.keys(b)
+  c = c || []
+
   var value
   var cIndex
   var aIndex
@@ -36,9 +37,7 @@ function processArray (array, output, nested) {
   var type
 
   if (nested && output) {
-    output = {
-      items: output
-    }
+    output = { items: output }
   } else {
     output = output || {}
     output.type = Type.string(array).toLowerCase()
@@ -46,8 +45,8 @@ function processArray (array, output, nested) {
   }
 
   // Determine whether each item is different
-  for (var index = 0, length = array.length; index < length; index++) {
-    var elementType = Type.string(array[index]).toLowerCase()
+  for (var arrIndex = 0, arrLength = array.length; arrIndex < arrLength; arrIndex++) {
+    var elementType = Type.string(array[arrIndex]).toLowerCase()
 
     if (type && elementType !== type) {
       output.items.oneOf = []
@@ -65,27 +64,21 @@ function processArray (array, output, nested) {
 
   // Process each item depending
   if (typeof output.items.oneOf !== 'undefined' || type === 'object') {
-    for (var index = 0, length = array.length; index < length; index++) {
-      var value = array[index]
+    for (var itemIndex = 0, itemLength = array.length; itemIndex < itemLength; itemIndex++) {
+      var value = array[itemIndex]
       var itemType = Type.string(value).toLowerCase()
-      var required = []
       var processOutput
 
-      switch (itemType) {
-        case "object":
-          if (output.items.properties) {
-            output.items.required = getUniqueKeys(output.items.properties, value, output.items.required)
-          }
+      if (itemType === 'object') {
+        if (output.items.properties) {
+          output.items.required = getUniqueKeys(output.items.properties, value, output.items.required)
+        }
 
-          processOutput = processObject(value, oneOf ? {} : output.items.properties, true)
-          break
-
-        case "array":
-          processOutput = processArray(value, oneOf ? {} : output.items.properties, true)
-          break
-
-        default:
-          processOutput = { type: itemType }
+        processOutput = processObject(value, oneOf ? {} : output.items.properties, true)
+      } else if (itemType === 'array') {
+        processOutput = processArray(value, oneOf ? {} : output.items.properties, true)
+      } else {
+        processOutput = { type: itemType }
       }
 
       if (oneOf) {
@@ -101,9 +94,7 @@ function processArray (array, output, nested) {
 
 function processObject (object, output, nested) {
   if (nested && output) {
-    output = {
-      properties: output
-    }
+    output = { properties: output }
   } else {
     output = output || {}
     output.type = Type.string(object).toLowerCase()
@@ -114,24 +105,11 @@ function processObject (object, output, nested) {
     var value = object[key]
     var type = Type.string(value).toLowerCase()
 
-    if (type === 'undefined') {
-      type = 'null'
-    }
+    type = type === 'undefined' ? 'null' : type
 
-    switch (type) {
-      case "object":
-        output.properties[key] = processObject(value)
-        break
-
-      case "array":
-        output.properties[key] = processArray(value)
-        break
-
-      default:
-        output.properties[key] = {
-          type: type
-        }
-    }
+    if (type === 'object') output.properties[key] = processObject(value)
+    else if (type === 'array') output.properties[key] = processArray(value)
+    else output.properties[key] = { type: type }
   }
 
   return nested ? output.properties : output
@@ -155,24 +133,21 @@ module.exports = function (title, object) {
   output.type = Type.string(object).toLowerCase()
 
   // Process object
-  switch (output.type) {
-    case "object":
-      processOutput = processObject(object)
-      output.type = processOutput.type
-      output.properties = processOutput.properties
-      break
+  if (output.type === 'object') {
+    processOutput = processObject(object)
+    output.type = processOutput.type
+    output.properties = processOutput.properties
+  }
 
-    case "array":
-      processOutput = processArray(object)
-      output.type = processOutput.type
-      output.items = processOutput.items
+  if (output.type === 'array') {
+    processOutput = processArray(object)
+    output.type = processOutput.type
+    output.items = processOutput.items
 
-      if (output.title) {
-        output.items.title = output.title
-        output.title += " Set"
-      }
-
-      break
+    if (output.title) {
+      output.items.title = output.title
+      output.title += ' Set'
+    }
   }
 
   // Output

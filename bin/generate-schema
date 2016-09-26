@@ -14,6 +14,9 @@ if (args[0] === '--generic' || args[0] === '-g') {
 } else if (args[0] === '--mongoose' || args[0] === '-m') {
   mode = "mongoose"
   args.shift()
+} else if (args[0] === '--big-query' || args[0] === '-b') {
+  mode = "bigquery"
+  args.shift()
 }
 
 function evaluate (data) {

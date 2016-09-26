@@ -6,7 +6,8 @@ Schema Outputs
 
 - Generic
 - JSON Schema
-- Mongoose Schema
+- [Mongoose](http://mongoosejs.com/) Schema
+- [BigQuery](https://cloud.google.com/bigquery/) Schema
 
 [![Build Status][travis-image]][travis-url]
 [![version][npm-version]][npm-url]
@@ -140,6 +141,10 @@ Generate JSON Schema from given object.
 
 Generates Mongoose Schema from a given object.
 
+### g.bigquery(Object object)
+
+Generates [Google BigQuery](https://cloud.google.com/bigquery/) schema from a given object.
+
 ## Binary usage
 
 ```bash
@@ -176,6 +181,7 @@ To quit type: exit
 - JSON Schema (Default Mode)
 - `-g, --generic` - Generic Mode
 - `-m, --mongoose` - Mongoose Mode
+- `-b, --big-query` - Google BigQuery Mode
 
 # License
 
