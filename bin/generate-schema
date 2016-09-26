@@ -4,18 +4,18 @@ var pkg = require('../package.json')
 var fs = require('fs')
 
 var args = process.argv.slice(2)
-var content = ""
-var mode = "json"
+var content = ''
+var mode = 'json'
 
 // Support various schema generation modes
 if (args[0] === '--generic' || args[0] === '-g') {
-  mode = "generic"
+  mode = 'generic'
   args.shift()
 } else if (args[0] === '--mongoose' || args[0] === '-m') {
-  mode = "mongoose"
+  mode = 'mongoose'
   args.shift()
 } else if (args[0] === '--big-query' || args[0] === '-b') {
-  mode = "bigquery"
+  mode = 'bigquery'
   args.shift()
 }
 
@@ -26,7 +26,7 @@ function evaluate (data) {
     obj = JSON.parse(data)
   } catch (e) {
     try {
-      obj = eval("("+data+")")
+      obj = eval('(' + data + ')')
     } catch (e) {
       console.log('Invalid Object or JSON')
     }
@@ -37,23 +37,24 @@ function evaluate (data) {
 
 function prompt (motd) {
   if (motd) {
-    console.log("Welcome to Generate Schema", pkg.version)
-    console.log(" ")
-    console.log(" ", "Mode:", mode)
-    console.log(" ")
-    console.log("*", "Example Usage: ")
-    console.log(" ", "> {a:'b'}")
-    console.log(" ", "{ a: { type: 'string' } }")
-    console.log(" ")
-    console.log("To quit type: exit")
-    console.log(" ")
+    console.log('Welcome to Generate Schema', pkg.version)
+    console.log(' ')
+    console.log('*', 'Mode:')
+    console.log(' ', mode)
+    console.log(' ')
+    console.log('*', 'Example:')
+    console.log(' ', '> {a:"b"}')
+    console.log(' ', JSON.stringify(GenerateSchema[mode]({a: 'b'})))
+    console.log(' ')
+    console.log('To quit type: exit')
+    console.log(' ')
   }
 
-  process.stdout.write("> ")
+  process.stdout.write('> ')
 }
 
 function callback (data) {
-  if (data == 'exit') {
+  if (data.indexOf('exit') === 0) {
     return process.exit()
   }
 
@@ -66,10 +67,10 @@ function callback (data) {
   prompt()
 }
 
-var stream = process.stdin;
+var stream = process.stdin
 
 if (args[0]) {
-  stream = fs.createReadStream(args[0]);
+  stream = fs.createReadStream(args[0])
   stream.on('close', function () {
     process.exit(1)
   })
@@ -80,15 +81,15 @@ stream.setEncoding('utf8')
 if (!args.length) {
   prompt(true)
 
-  stream.on('data', function(buf) {
+  stream.on('data', function (buf) {
     callback(buf.toString().trim())
   })
 } else {
-  stream.on('data', function(buf) {
+  stream.on('data', function (buf) {
     content += buf.toString()
   })
 
-  stream.on('end', function() {
+  stream.on('end', function () {
     console.log(JSON.stringify(GenerateSchema[mode](evaluate(content)), null, 2))
   })
 }
