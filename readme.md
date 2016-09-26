@@ -5,7 +5,7 @@ Effortlessly convert your JSON Object to JSON Schema, Mongoose Schema, or a Gene
 Schema Outputs
 
 - Generic
-- JSON Schema
+- [JSON Schema](http://json-schema.org/)
 - [Mongoose](http://mongoosejs.com/) Schema
 - [BigQuery](https://cloud.google.com/bigquery/) Schema
 
