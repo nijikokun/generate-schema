@@ -148,32 +148,35 @@ Generates [Google BigQuery](https://cloud.google.com/bigquery/) schema from a gi
 ## Binary usage
 
 ```bash
-$ generate-schema [-g] [--generic] [<file>]
+$ generate-schema [options] [<file>]
 ```
 
 ### REPL Mode
 
 When no file is specified you will enter a repl mode.
 
-Example (`generate-schema -g`):
+Example (`generate-schema -b`):
 
 ```
-Welcome to Generate Schema 1.1.0
+Welcome to Generate Schema 2.3.1
 
-  Mode: generic
+* Mode:
+  bigquery
 
-* Example Usage:
-  > {a:'b'}
-  { a: { type: 'string' } }
+* Example:
+  > {a:"b"}
+  [{"name":"a","type":"STRING","mode":"NULLABLE"}]
 
 To quit type: exit
 
-> {a:'b'}
-{
-  "a": {
-    "type": "string"
+> {a:"b"}
+[
+  {
+    "name": "a",
+    "type": "STRING",
+    "mode": "NULLABLE"
   }
-}
+]
 ```
 
 #### Modes
