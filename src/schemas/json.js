@@ -111,8 +111,18 @@ function processArray (array, output, nested) {
       }
 
       if (oneOf) {
+         var childType = Type.string(value).toLowerCase();
+         var tempObj = {};
+          if (!arrayItem.type && childType === 'object') {
+              tempObj.properties = arrayItem
+              tempObj.type = 'object'
+              arrayItem = tempObj
+        }
         output.items.oneOf.push(arrayItem)
       } else {
+        if (output.items.type !== 'object') {
+            continue;
+        }
         output.items.properties = arrayItem
       }
     }
