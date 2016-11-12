@@ -2,17 +2,22 @@
 
 Effortlessly convert your JSON Object to JSON Schema, Mongoose Schema, or a Generic template for quick documentation / upstart.
 
-Schema Outputs
-
-- Generic
-- [JSON Schema](http://json-schema.org/)
-- [Mongoose](http://mongoosejs.com/) Schema
-- [BigQuery](https://cloud.google.com/bigquery/) Schema
-
 [![Build Status][travis-image]][travis-url]
 [![version][npm-version]][npm-url]
 [![License][npm-license]][license-url]
 [![Downloads][npm-downloads]][npm-url]
+
+
+## Schema Outputs
+
+- Generic
+- [JSON Schema][json-schema]
+- [Mongoose Schema][mongoose-schema]
+- [BigQuery Schema][bigquery-schema]
+
+
+<hr />
+
 
 # Installation
 
@@ -20,12 +25,25 @@ Schema Outputs
 $ npm install generate-schema --save
 ```
 
-Optionally, for the binary install globally with `-g` (see below)
+
+Optionally, add `-g` to the above if you want the `generate-schema` command line executable. (See below.)
+
+
+<hr />
+
 
 # Usage
 
+
+## JS <abbr title="Application Programming Interface">API</abbr>
+
+
+### Example
+
+Source:
+
 ```js
-var GenerateSchema = require('generate-schema')
+var GenerateSchema = require('generate-schema');
 
 // Capture Schema Output
 var schema = GenerateSchema.json('Product', [
@@ -58,7 +76,7 @@ var schema = GenerateSchema.json('Product', [
             "longitude": -32.7
         }
     }
-])
+]);
 ```
 
 Output:
@@ -124,40 +142,58 @@ Output:
 }
 ```
 
-## Methods
 
-### g.generic(Object object)
+### Methods
 
-Generates generic schema where property types are described using primitives
+#### `g.generic(Object object)`
 
-### g.json(String title, Mixed object)
+Generates a generic schema from `object`. Property types are described using primitives.
 
-Generate JSON Schema from given object.
+#### `g.json([String title,] Mixed object)`
+
+Generates JSON Schema from `object`.
 
 - `title` is optional
 - `object` must be of type `Object` or `Array`
 
-### g.mongoose(Object object)
+#### `g.mongoose(Object object)`
 
-Generates Mongoose Schema from a given object.
+Generates a [Mongoose Schema][mongoose-schema] from `object`.
 
-### g.bigquery(Object object)
+#### `g.bigquery(Object object)`
 
-Generates [Google BigQuery](https://cloud.google.com/bigquery/) schema from a given object.
+Generates a [Google BigQuery][bigquery-schema] schema from  `object`.
 
-## Binary usage
+<hr />
+
+
+## <abbr title="Command Line Interface">CLI</abbr>
+
+CLI Usage:
 
 ```bash
 $ generate-schema [options] [<file>]
 ```
 
-### REPL Mode
 
-When no file is specified you will enter a repl mode.
+### Options
 
-Example (`generate-schema -b`):
+| Option            | Mode                  |
+| ------            | ----                  |
+| (default mode)    | JSON Schema           |
+| `-g, --generic`   | Generic Mode          |
+| `-m, --mongoose`  | Mongoose Mode         |
+| `-b, --big-query` | Google BigQuery Mode  |
+
+
+### <abbr title="Read Eval Print Loop">REPL</abbr> (Interactive Mode)
+
+When no file is specified, `generate-schema` will enter a <abbr title="Read Eval Print Loop">REPL</abbr> mode.
+
+#### Example
 
 ```
+$ generate-schema -b
 Welcome to Generate Schema 2.3.1
 
 * Mode:
@@ -179,21 +215,23 @@ To quit type: exit
 ]
 ```
 
-#### Modes
+<hr />
 
-- JSON Schema (Default Mode)
-- `-g, --generic` - Generic Mode
-- `-m, --mongoose` - Mongoose Mode
-- `-b, --big-query` - Google BigQuery Mode
 
 # License
 
-MIT
+[MIT][license-url]
 
+
+<!-- links -->
 [license-url]: https://github.com/Nijikokun/generate-schema/blob/master/LICENSE
 
 [travis-url]: https://travis-ci.org/nijikokun/generate-schema
 [travis-image]: https://travis-ci.org/nijikokun/generate-schema.svg?branch=master
+
+[json-schema]: http://json-schema.org
+[mongoose-schema]: http://mongoosejs.com
+[bigquery-schema]: https://cloud.google.com/bigquery/
 
 [npm-url]: https://www.npmjs.com/package/generate-schema
 [npm-license]: https://img.shields.io/npm/l/generate-schema.svg?style=flat
