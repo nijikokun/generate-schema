@@ -34,7 +34,7 @@ function getNativeType (string) {
 }
 
 module.exports = function Process (object, output) {
-  output = output || {}
+  var output = output || {}
 
   for (var key in object) {
     var value = object[key]
@@ -82,9 +82,9 @@ module.exports = function Process (object, output) {
       }
 
       if (originalType && originalType === 'array') {
-        output[key] = [getNativeType(type)]
+        output[key] = { type: [getNativeType(type)] }
       } else {
-        output[key] = getNativeType(type)
+        output[key] = { type: getNativeType(type) }
       }
     }
   }
