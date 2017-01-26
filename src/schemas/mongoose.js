@@ -46,7 +46,7 @@ module.exports = function Process (object, output) {
       type = 'buffer'
     }
 
-    if (typeof value.toString !== 'undefined' && value.toString().match(/^[0-9a-fA-F]{24}$/)) {
+    if (value != null && typeof value.toString !== 'undefined' && value.toString().match(/^[0-9a-fA-F]{24}$/)) {
       type = 'objectid'
     }
 
