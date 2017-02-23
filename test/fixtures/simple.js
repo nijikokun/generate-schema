@@ -10,6 +10,10 @@ module.exports = {
     body: 'There once was someone who viewed tests, and they were amazing.'
   },
   comments: [{
-    body: 'Nothing is safe inside of an array'
+    body: 'Nothing is safe inside of an array',
+    tags: ['hello']
+  }, {
+    body: '',
+    tags: [null]
   }]
 }

@@ -61,6 +61,7 @@ function processArray(array, output, nested) {
         output = output || {}
         output.type = getPropertyType(array)
         output.items = output.items || {}
+        type = output.items.type || null
     }
 
     // Determine whether each item is different
@@ -79,10 +80,15 @@ function processArray(array, output, nested) {
     }
 
     // Setup type otherwise
-    if (!oneOf) {
+    if (!oneOf && type) {
         output.items.type = type
         if (format) {
             output.items.format = format
+        }
+    } else if (oneOf) {
+        output.items = {
+            oneOf: [{ type: type }],
+            required: output.items.required
         }
     }
 
@@ -144,12 +150,12 @@ function processObject(object, output, nested) {
         type = type === 'undefined' ? 'null' : type
 
         if (type === 'object') {
-            output.properties[key] = processObject(value)
+            output.properties[key] = processObject(value, output.properties[key])
             continue
         }
 
         if (type === 'array') {
-            output.properties[key] = processArray(value)
+            output.properties[key] = processArray(value, output.properties[key])
             continue
         }
 
