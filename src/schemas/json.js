@@ -85,7 +85,7 @@ function processArray(array, output, nested) {
         if (format) {
             output.items.format = format
         }
-    } else if (oneOf) {
+    } else if (oneOf && type !== 'object') {
         output.items = {
             oneOf: [{ type: type }],
             required: output.items.required
