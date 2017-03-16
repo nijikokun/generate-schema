@@ -6,6 +6,7 @@ var fs = require('fs')
 var args = process.argv.slice(2)
 var content = ''
 var mode = 'json'
+var quiet = false
 
 // Support various schema generation modes
 if (args[0] === '--generic' || args[0] === '-g') {
@@ -16,6 +17,9 @@ if (args[0] === '--generic' || args[0] === '-g') {
   args.shift()
 } else if (args[0] === '--big-query' || args[0] === '-b') {
   mode = 'bigquery'
+  args.shift()
+} else if (args[0] === '--quiet' || args[0] === '-q') {
+  quiet = true
   args.shift()
 }
 
@@ -36,7 +40,7 @@ function evaluate (data) {
 }
 
 function prompt (motd) {
-  if (motd) {
+  if (motd && !quiet) {
     console.log('Welcome to Generate Schema', pkg.version)
     console.log(' ')
     console.log('*', 'Mode:')
@@ -50,7 +54,7 @@ function prompt (motd) {
     console.log(' ')
   }
 
-  process.stdout.write('> ')
+  if(process.stdin.isTTY) process.stdout.write('> ')
 }
 
 function callback (data) {
