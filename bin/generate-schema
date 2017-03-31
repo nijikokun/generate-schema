@@ -54,7 +54,9 @@ function prompt (motd) {
     console.log(' ')
   }
 
-  if(process.stdin.isTTY) process.stdout.write('> ')
+  if (process.stdin.isTTY) {
+    process.stdout.write('> ')
+  }
 }
 
 function callback (data) {
@@ -63,7 +65,6 @@ function callback (data) {
   }
 
   var obj = evaluate(data)
-
   if (obj) {
     console.log(JSON.stringify(GenerateSchema[mode](obj), null, 2))
   }
