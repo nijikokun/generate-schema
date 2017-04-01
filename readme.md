@@ -1,50 +1,90 @@
 # Generate Schemas
 
-Effortlessly convert your JSON Object to JSON Schema, Mongoose Schema, or a Generic template for quick documentation / upstart.
+Convert JSON Objects to JSON Schema, Mongoose Schema, Google BigQuery, or a Generic template for documentation, code generation, and more.
 
 [![Build Status][travis-image]][travis-url]
 [![version][npm-version]][npm-url]
 [![License][npm-license]][license-url]
 [![Downloads][npm-downloads]][npm-url]
 
+## Table of Contents
 
-## Schema Outputs
-
-- Generic
-- [JSON Schema][json-schema]
-- [Mongoose Schema][mongoose-schema]
-- [BigQuery Schema][bigquery-schema]
-
-
-<hr />
+- [Installation](#installation)
+- [CLI](#cli)
+  * [Options](#options)
+  * [REPL Mode](#repl-interactive-mode)
+    + [Example](#example)
+- [Usage](#usage)
+  * [JS API](#js-api)
+    + [Example](#example-1)
+    + [Methods](#methods)
+      - [`g.generic(Object object)`](#ggenericobject-object)
+      - [`g.json([String title,] Mixed object)`](#gjsonstring-title-mixed-object)
+      - [`g.mongoose(Object object)`](#gmongooseobject-object)
+      - [`g.bigquery(Object object)`](#gbigqueryobject-object)
+- [License](#license)
 
 
 # Installation
 
+Install with [npm](https://www.npmjs.com/):
+
 ```bash
-$ npm install generate-schema --save
+$ npm i --save generate-schema
 ```
 
+Optionally, add `-g` to the above if you want the `generate-schema` [command line](#cli) executable.
 
-Optionally, add `-g` to the above if you want the `generate-schema` command line executable. (See below.)
+# <abbr title="Command Line Interface">CLI</abbr>
 
+```
+  Usage: generate-schema [options ...] [file]
 
-<hr />
+  Common Options:
 
+    -h, --help         output usage information
+    -V, --version      output the version number
+    -q, --quiet        Skip help message in program output
 
-# Usage
+  Mode Options:
+    -g, --generic      Generic JSON Primitives schema output
+    -j, --json-schema  JSON Schema output
+    -m, --mongoose     Mongoose Schema output
+    -b, --big-query    Google BigQuery Schema output
+```
 
+## <abbr title="Read Eval Print Loop">REPL</abbr> Mode
 
-## JS <abbr title="Application Programming Interface">API</abbr>
-
+When no file is specified, `generate-schema` enters a <abbr title="Read Eval Print Loop">REPL</abbr> mode.
 
 ### Example
 
-Source:
+```
+$ generate-schema -b
+generate-schema v2.3.3 (bigquery)
+Type "exit" to quit.
+Type {a:"b"} to see an example.
+> {a:"b"}
+[
+  {
+    "name": "a",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]
+```
+
+# Usage
+
+## JS <abbr title="Application Programming Interface">API</abbr>
+
+### Example
 
 ```js
-var GenerateSchema = require('generate-schema');
+var GenerateSchema = require('generate-schema')
+```
 
+```
 // Capture Schema Output
 var schema = GenerateSchema.json('Product', [
     {
@@ -76,10 +116,10 @@ var schema = GenerateSchema.json('Product', [
             "longitude": -32.7
         }
     }
-]);
+])
 ```
 
-Output:
+Outputs:
 
 ```json
 {
@@ -164,66 +204,13 @@ Generates a [Mongoose Schema][mongoose-schema] from `object`.
 
 Generates a [Google BigQuery][bigquery-schema] schema from  `object`.
 
-<hr />
-
-
-## <abbr title="Command Line Interface">CLI</abbr>
-
-CLI Usage:
-
-```bash
-$ generate-schema [options] [<file>]
-```
-
-
-### Options
-
-| Option            | Mode                  |
-| ------            | ----                  |
-| (default mode)    | JSON Schema           |
-| `-g, --generic`   | Generic Mode          |
-| `-m, --mongoose`  | Mongoose Mode         |
-| `-b, --big-query` | Google BigQuery Mode  |
-
-
-### <abbr title="Read Eval Print Loop">REPL</abbr> (Interactive Mode)
-
-When no file is specified, `generate-schema` will enter a <abbr title="Read Eval Print Loop">REPL</abbr> mode.
-
-#### Example
-
-```
-$ generate-schema -b
-Welcome to Generate Schema 2.3.1
-
-* Mode:
-  bigquery
-
-* Example:
-  > {a:"b"}
-  [{"name":"a","type":"STRING","mode":"NULLABLE"}]
-
-To quit type: exit
-
-> {a:"b"}
-[
-  {
-    "name": "a",
-    "type": "STRING",
-    "mode": "NULLABLE"
-  }
-]
-```
-
-<hr />
-
-
 # License
 
 [MIT][license-url]
 
 
 <!-- links -->
+
 [license-url]: https://github.com/Nijikokun/generate-schema/blob/master/LICENSE
 
 [travis-url]: https://travis-ci.org/nijikokun/generate-schema

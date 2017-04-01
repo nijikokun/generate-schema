@@ -1,27 +1,48 @@
 #!/usr/bin/env node
+
+// Packages
 var GenerateSchema = require('../src/index')
+var cli = require('commander')
 var pkg = require('../package.json')
 var fs = require('fs')
 
-var args = process.argv.slice(2)
+// Outputs
 var content = ''
 var mode = 'json'
 var quiet = false
+var file = null
 
-// Support various schema generation modes
-if (args[0] === '--generic' || args[0] === '-g') {
-  mode = 'generic'
-  args.shift()
-} else if (args[0] === '--mongoose' || args[0] === '-m') {
+// Setup CLI
+cli.version(pkg.version)
+cli.usage('[options ...] [file]')
+
+cli.option('-q, --quiet', 'Skip help message in program output', function () { 
+  quiet = true 
+})
+
+cli.option('-g, --generic', 'Generic JSON Primitives schema output', function () { 
+  mode = 'generic' 
+})
+
+cli.option('-j, --json-schema', 'JSON Schema output', function () { 
+  mode = 'json' 
+})
+
+cli.option('-m, --mongoose', 'Mongoose Schema output', function () {
   mode = 'mongoose'
-  args.shift()
-} else if (args[0] === '--big-query' || args[0] === '-b') {
+})
+
+cli.option('-b, --big-query', 'Google BigQuery Schema output', function () {
   mode = 'bigquery'
-  args.shift()
-} else if (args[0] === '--quiet' || args[0] === '-q') {
-  quiet = true
-  args.shift()
-}
+})
+
+cli.action(function (filename) {
+  file = filename
+})
+
+cli.parse(process.argv)
+
+// Program
 
 function evaluate (data) {
   var obj
@@ -41,17 +62,9 @@ function evaluate (data) {
 
 function prompt (motd) {
   if (motd && !quiet) {
-    console.log('Welcome to Generate Schema', pkg.version)
-    console.log(' ')
-    console.log('*', 'Mode:')
-    console.log(' ', mode)
-    console.log(' ')
-    console.log('*', 'Example:')
-    console.log(' ', '> {a:"b"}')
-    console.log(' ', JSON.stringify(GenerateSchema[mode]({a: 'b'})))
-    console.log(' ')
-    console.log('To quit type: exit')
-    console.log(' ')
+    console.log('generate-schema', 'v' + pkg.version, '(' + mode + ')')
+    console.log('Type', '"exit"', 'to quit.')
+    console.log('Type', '{a:"b"}', 'to see an example.')
   }
 
   if (process.stdin.isTTY) {
@@ -74,8 +87,8 @@ function callback (data) {
 
 var stream = process.stdin
 
-if (args[0]) {
-  stream = fs.createReadStream(args[0])
+if (file) {
+  stream = fs.createReadStream(file)
   stream.on('close', function () {
     process.exit(1)
   })
@@ -83,7 +96,7 @@ if (args[0]) {
 
 stream.setEncoding('utf8')
 
-if (!args.length) {
+if (!file) {
   prompt(true)
 
   stream.on('data', function (buf) {

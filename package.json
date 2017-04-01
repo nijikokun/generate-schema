@@ -34,6 +34,7 @@
     "datatypes"
   ],
   "dependencies": {
+    "commander": "^2.9.0",
     "type-of-is": "^3.4.0"
   },
   "devDependencies": {
