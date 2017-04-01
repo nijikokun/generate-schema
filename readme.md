@@ -74,11 +74,11 @@ Type {a:"b"} to see an example.
 
 # Usage
 
-## Example
-
 ```js
 var GenerateSchema = require('generate-schema')
 ```
+
+## Example
 
 ```
 // Capture Schema Output
