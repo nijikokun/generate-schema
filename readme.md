@@ -15,15 +15,13 @@ Convert JSON Objects to JSON Schema, Mongoose Schema, Google BigQuery, or a Gene
   * [REPL Mode](#repl-interactive-mode)
     + [Example](#example)
 - [Usage](#usage)
-  * [JS API](#js-api)
-    + [Example](#example-1)
-    + [Methods](#methods)
-      - [`g.generic(Object object)`](#ggenericobject-object)
-      - [`g.json([String title,] Mixed object)`](#gjsonstring-title-mixed-object)
-      - [`g.mongoose(Object object)`](#gmongooseobject-object)
-      - [`g.bigquery(Object object)`](#gbigqueryobject-object)
+  + [Example](#example-1)
+  + [Methods](#methods)
+    - [`g.generic(Object object)`](#ggenericobject-object)
+    - [`g.json([String title,] Mixed object)`](#gjsonstring-title-mixed-object)
+    - [`g.mongoose(Object object)`](#gmongooseobject-object)
+    - [`g.bigquery(Object object)`](#gbigqueryobject-object)
 - [License](#license)
-
 
 # Installation
 
@@ -76,9 +74,7 @@ Type {a:"b"} to see an example.
 
 # Usage
 
-## JS <abbr title="Application Programming Interface">API</abbr>
-
-### Example
+## Example
 
 ```js
 var GenerateSchema = require('generate-schema')
@@ -183,7 +179,7 @@ Outputs:
 ```
 
 
-### Methods
+## Methods
 
 #### `g.generic(Object object)`
 
