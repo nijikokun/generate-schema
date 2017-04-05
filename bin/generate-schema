@@ -32,6 +32,10 @@ cli.option('-m, --mongoose', 'Mongoose Schema output', function () {
   mode = 'mongoose'
 })
 
+cli.option('-s, --mysql', 'MySQL Schema output', function () {
+  mode = 'mysql'
+})
+
 cli.option('-b, --big-query', 'Google BigQuery Schema output', function () {
   mode = 'bigquery'
 })
@@ -77,9 +81,16 @@ function callback (data) {
     return process.exit()
   }
 
-  var obj = evaluate(data)
+  var obj
+  obj = evaluate(data)
+  obj = GenerateSchema[mode](obj)
+
+  if (obj && typeof obj === 'object') {
+    obj = JSON.stringify(GenerateSchema[mode](obj), null, 2)
+  }
+
   if (obj) {
-    console.log(JSON.stringify(GenerateSchema[mode](obj), null, 2))
+    console.log(obj)
   }
 
   prompt()

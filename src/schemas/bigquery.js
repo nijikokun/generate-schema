@@ -41,6 +41,6 @@ function processFields (array, data) {
   })
 }
 
-module.exports = function (data) {
+module.exports = function Process (data) {
   return processFields([], data)
 }
