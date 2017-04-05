@@ -1,6 +1,6 @@
 # Generate Schemas
 
-Convert JSON Objects to JSON Schema, Mongoose Schema, Google BigQuery, or a Generic template for documentation, code generation, and more.
+Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, Google BigQuery, or a Generic template for documentation, code generation, and more.
 
 [![Build Status][travis-image]][travis-url]
 [![version][npm-version]][npm-url]
@@ -18,6 +18,7 @@ Convert JSON Objects to JSON Schema, Mongoose Schema, Google BigQuery, or a Gene
   + [Example](#example-1)
   + [Methods](#methods)
     - [`g.generic(Object object)`](#ggenericobject-object)
+    - [`g.mysql([String tableName,] Mixed object)`](#gmysqlstring-tablename-mixed-object)
     - [`g.json([String title,] Mixed object)`](#gjsonstring-title-mixed-object)
     - [`g.mongoose(Object object)`](#gmongooseobject-object)
     - [`g.bigquery(Object object)`](#gbigqueryobject-object)
@@ -47,6 +48,7 @@ Optionally, add `-g` to the above if you want the `generate-schema` [command lin
   Mode Options:
     -g, --generic      Generic JSON Primitives schema output
     -j, --json-schema  JSON Schema output
+    -s, --mysql        MySQL Table Schema output
     -m, --mongoose     Mongoose Schema output
     -b, --big-query    Google BigQuery Schema output
 ```
@@ -59,7 +61,7 @@ When no file is specified, `generate-schema` enters a <abbr title="Read Eval Pri
 
 ```
 $ generate-schema -b
-generate-schema v2.4.0 (bigquery)
+generate-schema v2.5.0 (bigquery)
 Type "exit" to quit.
 Type {a:"b"} to see an example.
 > {a:"b"}
@@ -184,6 +186,13 @@ Outputs:
 #### `g.generic(Object object)`
 
 Generates a generic schema from `object`. Property types are described using primitives.
+
+#### `g.mysql([String tableName,] Mixed object)`
+
+Generates MySQL Table Schema from `object`.
+
+- `tableName` is optional, defaults to `generic`
+- `object` must be of type `Object` or `Array`
 
 #### `g.json([String title,] Mixed object)`
 

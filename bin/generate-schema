@@ -32,7 +32,7 @@ cli.option('-m, --mongoose', 'Mongoose Schema output', function () {
   mode = 'mongoose'
 })
 
-cli.option('-s, --mysql', 'MySQL Schema output', function () {
+cli.option('-s, --mysql', 'MySQL Table Schema output', function () {
   mode = 'mysql'
 })
 
