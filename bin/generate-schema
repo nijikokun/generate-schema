@@ -86,7 +86,7 @@ function callback (data) {
   obj = GenerateSchema[mode](obj)
 
   if (obj && typeof obj === 'object') {
-    obj = JSON.stringify(GenerateSchema[mode](obj), null, 2)
+    obj = JSON.stringify(obj, null, 2)
   }
 
   if (obj) {

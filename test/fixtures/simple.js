@@ -15,5 +15,8 @@ module.exports = {
   }, {
     body: '',
     tags: [null]
+  }, {
+    body: null,
+    tags: [null]
   }]
 }

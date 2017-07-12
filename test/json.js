@@ -104,8 +104,9 @@ describe('JSON', function () {
       schema.properties.comments.items.should.be.type('object')
     })
 
-    it('.properties.comments.items.properties.body should be of type [string]', function () {
-      schema.properties.comments.items.properties.body.type.should.equal('string')
+    it('.properties.comments.items.properties.body should be of type [string, null]', function () {
+      schema.properties.comments.items.properties.body.type[0].should.equal('string')
+      schema.properties.comments.items.properties.body.type[1].should.equal('null')
     })
   })
 })

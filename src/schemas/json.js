@@ -159,6 +159,27 @@ function processObject(object, output, nested) {
       continue
     }
 
+    if (output.properties[key]) {
+      var entry = output.properties[key]
+      var hasTypeArray = Array.isArray(entry.type)
+
+      // When an array already exists, we check the existing
+      // type array to see if it contains our current property
+      // type, if not, we add it to the array and continue
+      if (hasTypeArray && entry.type.indexOf(type) < 0) {
+        entry.type.push(type)
+      }
+
+      // When multiple fields of differing types occur,
+      // json schema states that the field must specify the
+      // primitive types the field allows in array format.
+      if (!hasTypeArray && entry.type !== type) {
+        entry.type = [entry.type, type]
+      }
+
+      continue
+    }
+
     output.properties[key] = {}
     output.properties[key].type = type
 

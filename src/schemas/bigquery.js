@@ -24,7 +24,7 @@ function getPropertyType (value) {
   return 'STRING'
 }
 
-function processFields (array, data) {
+function processFields (data) {
   return Object.keys(data).map(function (key) {
     var value = data[key]
     var entry = {
@@ -34,7 +34,7 @@ function processFields (array, data) {
     }
 
     if (entry.type === 'RECORD') {
-      entry.fields = processFields([], (entry.mode === 'REPEATED') ? value[0] : value)
+      entry.fields = processFields((entry.mode === 'REPEATED') ? value[0] : value)
     }
 
     return entry
@@ -42,5 +42,5 @@ function processFields (array, data) {
 }
 
 module.exports = function Process (data) {
-  return processFields([], data)
+  return processFields(data)
 }
