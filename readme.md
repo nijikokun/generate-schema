@@ -61,7 +61,7 @@ When no file is specified, `generate-schema` enters a <abbr title="Read Eval Pri
 
 ```
 $ generate-schema -b
-generate-schema v2.5.0 (bigquery)
+generate-schema v2.5.1 (bigquery)
 Type "exit" to quit.
 Type {a:"b"} to see an example.
 > {a:"b"}
