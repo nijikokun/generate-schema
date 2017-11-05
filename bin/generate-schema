@@ -40,6 +40,10 @@ cli.option('-b, --big-query', 'Google BigQuery Schema output', function () {
   mode = 'bigquery'
 })
 
+cli.option('-c, --clickhouse', 'ClickHouse Table Schema output', function () {
+  mode = 'clickhouse'
+})
+
 cli.action(function (filename) {
   file = filename
 })
