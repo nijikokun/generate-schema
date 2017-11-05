@@ -1,6 +1,6 @@
 # Generate Schemas
 
-Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, Google BigQuery, or a Generic template for documentation, code generation, and more.
+Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, ClickHouse Schema, Google BigQuery, or a Generic template for documentation, code generation, and more.
 
 [![Build Status][travis-image]][travis-url]
 [![version][npm-version]][npm-url]
@@ -22,6 +22,7 @@ Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, Google
     - [`g.json([String title,] Mixed object)`](#gjsonstring-title-mixed-object)
     - [`g.mongoose(Object object)`](#gmongooseobject-object)
     - [`g.bigquery(Object object)`](#gbigqueryobject-object)
+    - [`g.clickhouse([String tableName,] Mixed object, String dateField)`](#gclickhousestring-tablename-mixed-object)
 - [License](#license)
 
 # Installation
@@ -51,6 +52,7 @@ Optionally, add `-g` to the above if you want the `generate-schema` [command lin
     -s, --mysql        MySQL Table Schema output
     -m, --mongoose     Mongoose Schema output
     -b, --big-query    Google BigQuery Schema output
+    -c, --clickhouse   Clickhouse Table Schema output
 ```
 
 ## <abbr title="Read Eval Print Loop">REPL</abbr> Mode
@@ -208,6 +210,14 @@ Generates a [Mongoose Schema][mongoose-schema] from `object`.
 #### `g.bigquery(Object object)`
 
 Generates a [Google BigQuery][bigquery-schema] schema from  `object`.
+
+#### `g.clickhouse([String tableName,] Mixed object, String dateField)`
+
+Generates ClickHouse Table Schema from `object`.
+
+- `tableName` is optional, defaults to `generic`
+- `object` must be of type `Object` or `Array`
+- `dateField` Date field for ENGINE, must be of type `Date`
 
 # License
 
