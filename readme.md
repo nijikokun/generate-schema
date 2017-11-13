@@ -213,7 +213,7 @@ Generates a [Google BigQuery][bigquery-schema] schema from  `object`.
 
 #### `g.clickhouse([String tableName,] Mixed object, String dateField)`
 
-Generates ClickHouse Table Schema from `object`.
+Generates [ClickHouse Table Schema][clickhouse-schema] from `object`.
 
 - `tableName` is optional, defaults to `generic`
 - `object` must be of type `Object` or `Array`
@@ -227,15 +227,14 @@ Generates ClickHouse Table Schema from `object`.
 <!-- links -->
 
 [license-url]: https://github.com/Nijikokun/generate-schema/blob/master/LICENSE
-
 [travis-url]: https://travis-ci.org/nijikokun/generate-schema
 [travis-image]: https://travis-ci.org/nijikokun/generate-schema.svg?branch=master
-
-[json-schema]: http://json-schema.org
-[mongoose-schema]: http://mongoosejs.com
-[bigquery-schema]: https://cloud.google.com/bigquery/
-
 [npm-url]: https://www.npmjs.com/package/generate-schema
 [npm-license]: https://img.shields.io/npm/l/generate-schema.svg?style=flat
 [npm-version]: https://badge.fury.io/js/generate-schema.svg
 [npm-downloads]: https://img.shields.io/npm/dm/generate-schema.svg?style=flat
+
+[json-schema]: http://json-schema.org
+[mongoose-schema]: http://mongoosejs.com
+[bigquery-schema]: https://cloud.google.com/bigquery/
+[clickhouse-schema]: https://clickhouse.yandex/
