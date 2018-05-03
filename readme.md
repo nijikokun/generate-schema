@@ -6,6 +6,7 @@ Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, ClickH
 [![version][npm-version]][npm-url]
 [![License][npm-license]][license-url]
 [![Downloads][npm-downloads]][npm-url]
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnijikokun%2Fgenerate-schema.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnijikokun%2Fgenerate-schema?ref=badge_shield)
 
 ## Table of Contents
 
@@ -238,3 +239,6 @@ Generates [ClickHouse Table Schema][clickhouse-schema] from `object`.
 [mongoose-schema]: http://mongoosejs.com
 [bigquery-schema]: https://cloud.google.com/bigquery/
 [clickhouse-schema]: https://clickhouse.yandex/
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnijikokun%2Fgenerate-schema.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnijikokun%2Fgenerate-schema?ref=badge_large)
