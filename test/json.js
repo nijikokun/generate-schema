@@ -38,6 +38,18 @@ describe('JSON', function () {
     it('.items.properties.tags should be an object', function () {
       schema.items.properties.tags.should.be.type('object')
     })
+
+    it('.items.properties.id should be of type [integer]', function () {
+      schema.items.properties.id.type.should.equal('integer')
+    })
+
+    it('.items.properties.price should be of type [number]', function () {
+      schema.items.properties.price.type.should.equal('number')
+    })
+
+    it('.items.properties.dimensions.properties.length should be of type [integer, number]', function () {
+      schema.items.properties.dimensions.properties.length.type.should.eql(['integer', 'number'])
+    })
   })
 
   describe('Property Checks', function () {
@@ -55,8 +67,8 @@ describe('JSON', function () {
       schema.properties.should.be.type('object')
     })
 
-    it('.properties.id should be of type [number]', function () {
-      schema.properties.id.type.should.equal('number')
+    it('.properties.id should be of type [integer]', function () {
+      schema.properties.id.type.should.equal('integer')
     })
 
     it('.properties.slug should be of type [string]', function () {
