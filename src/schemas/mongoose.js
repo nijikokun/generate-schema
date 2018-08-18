@@ -54,7 +54,7 @@ module.exports = function Process (object, output) {
       type = Type.string(value).toLowerCase()
     }
 
-    if (type === 'string' && Utils.isDate(value)) {
+    if (type === 'string' && !/^[0-9]+$/.test(value) && Utils.isDate(value)) {
       type = 'date'
     }
 
