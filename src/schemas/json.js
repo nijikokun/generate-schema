@@ -215,7 +215,9 @@ module.exports = function Process (title, object) {
     processOutput = processObject(object)
     output.type = processOutput.type
     output.properties = processOutput.properties
-    output.required = Object.keys(object)
+    output.required = Object.keys(object).filter(function (key) {
+      return ['$schema'].includes(key)
+    })
   }
 
   if (output.type === 'array') {
