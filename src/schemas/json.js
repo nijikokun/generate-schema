@@ -141,6 +141,7 @@ function processObject(object, output, nested) {
     output = output || {}
     output.type = getPropertyType(object)
     output.properties = output.properties || {}
+    output.required = Object.keys(object)
   }
 
   for (var key in object) {
@@ -214,6 +215,7 @@ module.exports = function Process (title, object) {
     processOutput = processObject(object)
     output.type = processOutput.type
     output.properties = processOutput.properties
+    output.required = Object.keys(object)
   }
 
   if (output.type === 'array') {
