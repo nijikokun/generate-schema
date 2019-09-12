@@ -216,7 +216,7 @@ module.exports = function Process (title, object) {
     output.type = processOutput.type
     output.properties = processOutput.properties
     output.required = Object.keys(object).filter(function (key) {
-      return !['$schema'].includes(key)
+      return !key.startsWith('$')
     })
   }
 
