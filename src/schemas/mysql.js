@@ -89,7 +89,7 @@ function processObject (obj, options) {
       ? 'date'
       : Type.string(value).toLowerCase()
 
-    if (type !== 'undefined') {
+    if (type !== 'undefined' && type !== 'null') {
       type = Utils.isTimestamp(value) ? 'timestamp' : type
     }
 
