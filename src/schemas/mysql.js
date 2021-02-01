@@ -45,6 +45,8 @@ function processObject (obj, options) {
   var parent = options.parentTableName
   var parentId = options.parentTableId
   var parentIdType = options.parentTableIdType
+  
+  var tableId = options.tableId
 
   // In-memory storage
   var keys = Object.keys(obj)
@@ -62,22 +64,29 @@ function processObject (obj, options) {
     output.push(lang.property(parent + '_' + parentId, types[parentIdType]))
   }
   
-  // Obtain ID
-  var nkey
-  for (var i = 0; i < keys.length; i++) {
-    if (keys[i].toLowerCase() === 'id' || keys[i].toLowerCase().indexOf('_id') > -1) {
-      nkey = keys[i]
-      obj[nkey] = obj[keys[i]]
-      keys[i] = nkey
-      id = keys[i]
-      idType = typeof obj[keys[i]]
-    }
-  }
+  
+  if (tableId !== 'undefined' && tableId !== 'null' && obj[tableId]) {
+    id = tableId
+    idType = typeof obj[tableId]
+  } else {
 
-  if (!id) {
-    id = 'id'
-    idType = parentIdType || idType
-    output.push(lang.property(id, types[idType]))
+    // Obtain ID
+    var nkey
+    for (var i = 0; i < keys.length; i++) {
+      if (keys[i].toLowerCase() === 'id' || keys[i].toLowerCase().indexOf('_id') > -1) {
+        nkey = keys[i]
+        obj[nkey] = obj[keys[i]]
+        keys[i] = nkey
+        id = keys[i]
+        idType = typeof obj[keys[i]]
+      }
+    }
+
+    if (!id) {
+      id = 'id'
+      idType = parentIdType || idType
+      output.push(lang.property(id, types[idType]))
+    }
   }
 
   // Create table properties
@@ -153,13 +162,14 @@ function processObject (obj, options) {
   return output.concat(tables)
 }
 
-module.exports = function Process (tableName, object) {
+module.exports = function Process (tableName, object, options) {
   if (typeof tableName !== 'string') {
     object = tableName
     tableName = 'generic'
   }
 
   return processObject(object, {
-    tableName: tableName
+    tableName: tableName,
+    ...options
   }).join('\n')
 }
