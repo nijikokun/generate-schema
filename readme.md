@@ -31,7 +31,7 @@ Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, ClickH
 Install with [npm](https://www.npmjs.com/):
 
 ```bash
-$ npm i --save generate-schema
+$ npm i --save-dev generate-schema
 ```
 
 Optionally, add `-g` to the above if you want the `generate-schema` [command line](#cli) executable.
@@ -80,14 +80,14 @@ Type {a:"b"} to see an example.
 # Usage
 
 ```js
-var GenerateSchema = require('generate-schema')
+let GenerateSchema = require('generate-schema')
 ```
 
 ## Example
 
 ```
 // Capture Schema Output
-var schema = GenerateSchema.json('Product', [
+let schema = GenerateSchema.json('Product', [
     {
         "id": 2,
         "name": "An ice sculpture",
