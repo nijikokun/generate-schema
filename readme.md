@@ -1,6 +1,6 @@
 # Generate Schemas
 
-Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, ClickHouse Schema, Google BigQuery, or a Generic template for documentation, code generation, and more.
+Convert JSON Objects to MySQL Table Schema, JSON Schema, MongoDB Schema Validation, Mongoose Schema, ClickHouse Schema, Google BigQuery, or a Generic template for documentation, code generation, and more.
 
 [![Build Status][travis-image]][travis-url]
 [![version][npm-version]][npm-url]
@@ -10,20 +10,22 @@ Convert JSON Objects to MySQL Table Schema, JSON Schema, Mongoose Schema, ClickH
 
 ## Table of Contents
 
+- [Generate Schemas](#generate-schemas)
+  - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
 - [CLI](#cli)
-  * [Options](#options)
-  * [REPL Mode](#repl-interactive-mode)
-    + [Example](#example)
+  - [REPL Mode](#repl-mode)
+    - [Example](#example)
 - [Usage](#usage)
-  + [Example](#example-1)
-  + [Methods](#methods)
-    - [`g.generic(Object object)`](#ggenericobject-object)
-    - [`g.mysql([String tableName,] Mixed object)`](#gmysqlstring-tablename-mixed-object)
-    - [`g.json([String title,] Mixed object)`](#gjsonstring-title-mixed-object)
-    - [`g.mongoose(Object object)`](#gmongooseobject-object)
-    - [`g.bigquery(Object object)`](#gbigqueryobject-object)
-    - [`g.clickhouse([String tableName,] Mixed object, String dateField)`](#gclickhousestring-tablename-mixed-object)
+  - [Example](#example-1)
+  - [Methods](#methods)
+      - [`g.generic(Object object)`](#ggenericobject-object)
+      - [`g.mysql([String tableName,] Mixed object)`](#gmysqlstring-tablename-mixed-object)
+      - [`g.json([String title,] Mixed object)`](#gjsonstring-title-mixed-object)
+      - [`g.mongodb(Object object)`](#gmongodbobject-object)
+      - [`g.mongoose(Object object)`](#gmongooseobject-object)
+      - [`g.bigquery(Object object)`](#gbigqueryobject-object)
+      - [`g.clickhouse([String tableName,] Mixed object, String dateField)`](#gclickhousestring-tablename-mixed-object-string-datefield)
 - [License](#license)
 
 # Installation
@@ -48,12 +50,13 @@ Optionally, add `-g` to the above if you want the `generate-schema` [command lin
     -q, --quiet        Skip help message in program output
 
   Mode Options:
-    -g, --generic      Generic JSON Primitives schema output
-    -j, --json-schema  JSON Schema output
-    -s, --mysql        MySQL Table Schema output
-    -m, --mongoose     Mongoose Schema output
     -b, --big-query    Google BigQuery Schema output
     -c, --clickhouse   Clickhouse Table Schema output
+    -d, --mongodb      MongoDB Schema Validation output
+    -g, --generic      Generic JSON Primitives schema output
+    -j, --json-schema  JSON Schema output
+    -m, --mongoose     Mongoose Schema output
+    -s, --mysql        MySQL Table Schema output
 ```
 
 ## <abbr title="Read Eval Print Loop">REPL</abbr> Mode
@@ -204,6 +207,10 @@ Generates JSON Schema from `object`.
 - `title` is optional
 - `object` must be of type `Object` or `Array`
 
+#### `g.mongodb(Object object)`
+
+Generates a [MongoDB Schema Validation][mongodb-schema] from `object`.
+
 #### `g.mongoose(Object object)`
 
 Generates a [Mongoose Schema][mongoose-schema] from `object`.
@@ -236,7 +243,8 @@ Generates [ClickHouse Table Schema][clickhouse-schema] from `object`.
 [npm-downloads]: https://img.shields.io/npm/dm/generate-schema.svg?style=flat
 
 [json-schema]: http://json-schema.org
-[mongoose-schema]: http://mongoosejs.com
+[mongodb-schema]: https://www.mongodb.com/docs/manual/core/schema-validation/
+[mongoose-schema]: https://mongoosejs.com/docs/validation.html
 [bigquery-schema]: https://cloud.google.com/bigquery/
 [clickhouse-schema]: https://clickhouse.yandex/
 

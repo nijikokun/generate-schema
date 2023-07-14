@@ -1,4 +1,5 @@
 exports.generic = require('./schemas/generic')
+exports.mongodb = require('./schemas/mongodb')
 exports.mongoose = require('./schemas/mongoose')
 exports.bigquery = require('./schemas/bigquery')
 exports.mysql = require('./schemas/mysql')
