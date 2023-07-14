@@ -48,9 +48,9 @@ cli.option('-c, --clickhouse', 'ClickHouse Table Schema output', function () {
   mode = 'clickhouse'
 })
 
-cli.action(function (cmd) {
-  if (cmd.args?.length > 0) {
-    file = cmd[0]
+cli.action(function (filename) {
+  if (filename && typeof filename === 'string') {
+    file = filename
   }
 })
 
