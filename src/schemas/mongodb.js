@@ -20,7 +20,7 @@ function getNativeType(string) {
       return 'null';
 
     case 'number':
-      return 'decimal';
+      return 'double';
 
     case 'objectid':
       return 'ObjectId';
