@@ -8,25 +8,25 @@ function getNativeType(string) {
       return 'array';
 
     case 'buffer':
-      return 'binData';
+      return 'object';
 
     case 'boolean':
-      return 'bool';
+      return 'boolean';
 
     case 'date':
-      return 'date';
+      return 'string';
 
     case 'null':
       return 'null';
 
     case 'number':
-      return 'double';
+      return 'number';
 
     case 'objectid':
       return 'ObjectId';
 
     case 'regexp':
-      return 'regexp';
+      return 'string';
 
     case 'string':
       return 'string';
