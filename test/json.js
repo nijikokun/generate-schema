@@ -39,6 +39,12 @@ describe('JSON', function () {
       schema.items.properties.tags.should.be.type('object')
     })
 
+    it('.items.properties.filters.items should be an array of array', function () {
+      schema.items.properties.filters.type.should.eql('array')
+      schema.items.properties.filters.items.type.should.eql('array')
+      schema.items.properties.filters.items.items.type.should.eql('object')
+    })
+
     it('.items.properties.id should be of type [integer]', function () {
       schema.items.properties.id.type.should.equal('integer')
     })

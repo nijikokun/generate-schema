@@ -94,7 +94,7 @@ function processArray(array, output, nested) {
   }
 
   // Process each item depending
-  if (typeof output.items.oneOf !== 'undefined' || type === 'object') {
+  if (typeof output.items.oneOf !== 'undefined' || type === 'object' || type === 'array') {
     for (var itemIndex = 0, itemLength = array.length; itemIndex < itemLength; itemIndex++) {
       var value = array[itemIndex]
       var itemType = getPropertyType(value)
@@ -123,11 +123,10 @@ function processArray(array, output, nested) {
           arrayItem = tempObj
         }
         output.items.oneOf.push(arrayItem)
-      } else {
-        if (output.items.type !== 'object') {
-          continue;
-        }
+      } else if (output.items.type === 'object') {
         output.items.properties = arrayItem
+      } else if(output.items.type === 'array') {
+        output.items.items = arrayItem
       }
     }
   }

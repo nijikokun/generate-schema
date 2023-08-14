@@ -4,6 +4,12 @@ module.exports = [
     "name": "An ice sculpture",
     "price": 12.50,
     "tags": ["cold", "ice"],
+    "filters": [
+      [{
+        "operator": "EQ",
+        "value": "Ice Cold"
+      }]
+    ],
     "dimensions": {
       "length": 7.0,
       "width": 12.0,
