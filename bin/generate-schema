@@ -28,6 +28,10 @@ cli.option('-j, --json-schema', 'JSON Schema output', function () {
   mode = 'json' 
 })
 
+cli.option('-d, --mongodb', 'MongoDB Schema Validation output', function () {
+  mode = 'mongodb'
+})
+
 cli.option('-m, --mongoose', 'Mongoose Schema output', function () {
   mode = 'mongoose'
 })
@@ -45,7 +49,9 @@ cli.option('-c, --clickhouse', 'ClickHouse Table Schema output', function () {
 })
 
 cli.action(function (filename) {
-  file = filename
+  if (filename && typeof filename === 'string') {
+    file = filename
+  }
 })
 
 cli.parse(process.argv)

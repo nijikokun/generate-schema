@@ -25,6 +25,8 @@
     "is",
     "generate",
     "produce",
+    "mongo",
+    "mongodb",
     "mongoose",
     "generic",
     "validation",
