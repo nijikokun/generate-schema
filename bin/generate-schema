@@ -11,10 +11,15 @@ var content = ''
 var mode = 'json'
 var quiet = false
 var file = null
+var sortKeys = false
 
 // Setup CLI
 cli.version(pkg.version)
 cli.usage('[options ...] [file]')
+
+cli.option('-k, --keys', 'Sort object keys of the output', function () { 
+  sortKeys = true 
+})
 
 cli.option('-q, --quiet', 'Skip help message in program output', function () { 
   quiet = true 
@@ -102,6 +107,18 @@ function callback (data) {
 
 var stream = process.stdin
 
+var sortObjectKeys = (_key, value) => {
+  if (typeof value === 'object' && !Array.isArray(value)) {
+    return Object.keys(value)
+      .sort()
+      .reduce((sorted, k) => {
+        sorted[k] = value[k];
+        return sorted;
+      }, {});
+  }
+  return value;
+}
+
 if (file) {
   stream = fs.createReadStream(file)
   stream.on('close', function () {
@@ -123,6 +140,7 @@ if (!file) {
   })
 
   stream.on('end', function () {
-    console.log(JSON.stringify(GenerateSchema[mode](evaluate(content)), null, 2))
+    var output = GenerateSchema[mode](evaluate(content))
+    console.log(JSON.stringify(output, sortKeys ? sortObjectKeys : null, 2))
   })
 }
