@@ -11,6 +11,7 @@ var content = ''
 var mode = 'json'
 var quiet = false
 var file = null
+var exitCode = 0
 
 // Setup CLI
 cli.version(pkg.version)
@@ -44,11 +45,20 @@ cli.option('-c, --clickhouse', 'ClickHouse Table Schema output', function () {
   mode = 'clickhouse'
 })
 
+cli.option('-x, --exit-code <code>', 'Process exit code to use for successful execution', function () {
+  exitCode = 0
+})
+
 cli.action(function (filename) {
   file = filename
 })
 
 cli.parse(process.argv)
+
+var options = cli.opts();
+if (options.exitCode) {
+  exitCode = options.exitCode;
+}
 
 // Program
 
@@ -105,7 +115,7 @@ var stream = process.stdin
 if (file) {
   stream = fs.createReadStream(file)
   stream.on('close', function () {
-    process.exit(1)
+    process.exit(exitCode)
   })
 }
 
